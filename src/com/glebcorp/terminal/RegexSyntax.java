@@ -25,20 +25,28 @@ public final class RegexSyntax implements CommandSyntax {
                 regexBuilder.append("(\\s+)");
             }
             if(s == null) continue;
-
-            if(s.equals("\\w")){
-                regexBuilder.append("((?:[a-z][a-z]+))");
-                syntaxBuilder.append("<word>");
-                pos.add(count++, i);
-            }else if(s.equals("\\d")){
-                regexBuilder.append("(\\d+)");
-                syntaxBuilder.append("<int>");
-                pos.add(count++, i);
-            }else {
-                regexBuilder.append("(");
-                regexBuilder.append(s);
-                regexBuilder.append(")");
-                syntaxBuilder.append(s);
+            switch (s){
+                case Args.WORD:
+                    regexBuilder.append("((?:[a-zA-Z][a-zA-Z]+))");
+                    syntaxBuilder.append("[word]");
+                    pos.add(count++, i);
+                    break;
+                case Args.KEY:
+                    regexBuilder.append("((?:[a-zA-Z_$][a-zA-Z_$0-9]+))");
+                    syntaxBuilder.append("[key]");
+                    pos.add(count++, i);
+                    break;
+                case Args.NUMBER:
+                    regexBuilder.append("(\\d+)");
+                    syntaxBuilder.append("[number]");
+                    pos.add(count++, i);
+                    break;
+                default:
+                    regexBuilder.append("(");
+                    regexBuilder.append(s);
+                    regexBuilder.append(")");
+                    syntaxBuilder.append(s);
+                    break;
             }
             i++;
         }
