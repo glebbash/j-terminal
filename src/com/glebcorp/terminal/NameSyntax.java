@@ -1,5 +1,10 @@
 package com.glebcorp.terminal;
 
+/**
+ * Simple command syntax. Checks name match (case insensitive)
+ * @author Glebbash
+ */
+
 public final class NameSyntax implements CommandSyntax{
 
     private final String name;
@@ -9,6 +14,11 @@ public final class NameSyntax implements CommandSyntax{
     public NameSyntax(String name){
         this.name = name;
     }
+
+    /**
+     * @param input command to check syntax
+     * @return command name as the only argument
+     */
 
     @Override
     public String[] checkArgs(String input){

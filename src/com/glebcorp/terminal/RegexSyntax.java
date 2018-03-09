@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Uses regex and simple rules
+ * @see Terminal
+ * @author Glebbash
+ */
+
 public final class RegexSyntax implements CommandSyntax {
 
     private final ArrayList<Integer> pos = new ArrayList<>();
@@ -13,6 +19,10 @@ public final class RegexSyntax implements CommandSyntax {
     private final String[] args;
 
     private String syntax;
+
+    /**
+     * @param params rules
+     */
 
     public RegexSyntax(String ... params){
         int i = -1, count = 0;
@@ -60,15 +70,14 @@ public final class RegexSyntax implements CommandSyntax {
     @Override
     public String[] checkArgs(String input){
         Matcher m = pattern.matcher(input);
-        if(!m.find())
-            return null;
+        if(!m.find()) return null;
         for(int i = 0; i < args.length; i++)
             args[i] = m.group(pos.get(i) + 1);
         return args;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return syntax;
     }
 

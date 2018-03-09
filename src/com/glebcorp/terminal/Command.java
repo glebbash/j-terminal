@@ -1,5 +1,9 @@
 package com.glebcorp.terminal;
 
+/**
+ * Contains syntax and call method
+ * @author Glebbash
+ */
 public abstract class Command{
 
     private CommandSyntax syntax;
@@ -8,9 +12,20 @@ public abstract class Command{
 
     public Command(){}
 
+    /**
+     * Creates command with NameSyntax
+     * @param name command name
+     */
+
     public Command(String name){
         setSyntax(new NameSyntax(name));
     }
+
+    /**
+     * Creates command with RegexSyntax
+     * @param args rules
+     * @see Terminal
+     */
 
     public Command(String... args){
         if(args==null || args.length == 0)
